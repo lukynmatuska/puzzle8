@@ -1,0 +1,53 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    {{- if .IsHome }}
+    <meta name="description" content="{{ i18n " homeDescription" }}">
+    {{- else if .Description }}
+    <meta name="description" content="{{ .Description }}">
+    {{- end }}
+
+    <title>
+        {{- if .IsHome }}
+        {{ .Site.Title }}
+        {{- else }}
+        {{ .Title }} &middot; {{ .Site.Title }}
+        {{- end }}
+    </title>
+
+    <!-- My CSS -->
+    {{ $style := resources.Get "style.css" }}
+    {{ $style = $style | minify }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+    <!-- Montserrat -->
+    <link rel="preload" href="/fonts/montserrat/JTURjIg1_i6t8kCHKm45_dJE3gfD_vx3rCubqg.woff2" as="font"
+        type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/montserrat/JTURjIg1_i6t8kCHKm45_dJE3gnD-w.ttf" as="font" type="font/ttf"
+        crossorigin>
+    <link rel="preload" href="/fonts/montserrat/JTUSjIg1_i6t8kCHKm459WdhyyTh89ZNpQ.woff2" as="font" type="font/woff2"
+        crossorigin>
+    <link rel="preload" href="/fonts/montserrat/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf" as="font" type="font/ttf" crossorigin>
+    {{ $style := resources.Get "fonts/montserrat/montserrat.css" }}
+    {{ $style = $style | minify }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+    <!-- FontAwesome -->
+    <!-- <link rel="preload" href="/fonts/fontawesome/webfonts/fa-brands-400.woff" as="font" type="font/woff" crossorigin>
+    <link rel="preload" href="/fonts/fontawesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/fontawesome/webfonts/fa-solid-900.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/fontawesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/fontawesome/webfonts/fa-regular-400.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/fontawesome/webfonts/fa-solid-900.woff" as="font" type="font/woff" crossorigin>
+    <link rel="preload" href="/fonts/fontawesome/webfonts/fa-brands-400.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="/fonts/fontawesome/webfonts/fa-regular-400.woff" as="font" type="font/woff" crossorigin>
+    <link rel="preload" href="/fonts/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin> -->
+    <link rel="stylesheet" href="/fonts/fontawesome/css/all.min.css">
+</head>

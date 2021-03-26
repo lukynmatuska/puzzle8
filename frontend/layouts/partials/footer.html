@@ -1,0 +1,6 @@
+<footer class="o-footer">
+    &#169; Copyright {{ dateFormat "2006" now }}
+    <a class="o-link" target="_blank" href="https://lukasmatuska.cz">Lukáš Matuška</a>
+</footer>
+{{ $darkmode := resources.Get "js/darkmode.js" | minify }}
+<script src="{{ $darkmode.RelPermalink }}"></script>

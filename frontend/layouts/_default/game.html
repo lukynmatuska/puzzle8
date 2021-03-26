@@ -1,0 +1,27 @@
+{{ define "main"}}
+<main class="o-main game text-center">
+  <h1>{{ .Title }}</h1>
+  {{ .Content}}
+  <div id="modal" class="hide">
+    <div id="header"><button id="closeBtn" onclick="hideModal()">x</button></div>
+    <h1 id="message">{{ i18n "youWon" }}</h1>
+  </div>
+  <div id="container" class="playground">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+
+</main>
+{{/* {{ $puzzle8 := resources.Get "js/puzzle8.js" | minify }} */}}
+{{ $puzzle8 := resources.Get "js/puzzle8.js" }}
+<script src="{{ $puzzle8.RelPermalink }}"></script>
+{{ end }}

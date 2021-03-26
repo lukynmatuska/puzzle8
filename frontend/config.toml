@@ -1,0 +1,35 @@
+baseURL = "/"
+defaultContentLanguage = "cs"
+defaultContentLanguageInSubdir = true
+title = "Puzzle8"
+disableKinds = ["taxonomy", "taxonomyTerm"]
+[languages]
+  [languages.cs]
+    weight = 0
+    languageName = "Čeština"
+    [languages.cs.menu]
+        [[languages.cs.menu.main]]
+            url    = "/cs/"
+            name   = "Domů"
+            weight = 1
+        [[languages.cs.menu.main]]
+            url    = "/cs/game"
+            name   = "Hra"
+            weight = 2
+  [languages.en]
+    weight = 1
+    languageName = "English"
+    [languages.en.menu]
+        [[languages.en.menu.main]]
+            url    = "/en/"
+            name   = "Home"
+            weight = 1
+        [[languages.en.menu.main]]
+            url    = "/en/game"
+            name   = "Game"
+            weight = 2
+[params]
+    [[params.links]]
+        icon = "github"
+        title = "GitHub"
+        url = "https://github.com/lukynmatuska/puzzle8"

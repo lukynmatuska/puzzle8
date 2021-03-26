@@ -1,0 +1,15 @@
+[homeTitle]
+other = "Puzzle8"
+
+[homeDescription]
+other = "Hra nejen pro náročné hráče"
+
+[readingTime]
+one = "Minuta čtení"
+other = "{{.Count}} minut čtení"
+
+[readArticle]
+other = "Číst článek"
+
+[youWon]
+other = "Vyhrál jste!"

@@ -1,0 +1,18 @@
+[homeTitle]
+other = "Puzzle8"
+
+[homeDescription]
+other = "Your wet dream"
+
+[wordCount]
+other = "This article has {{ .WordCount }} words."
+
+[readingTime]
+one = "One minute to read"
+other = "{{.Count}} minutes to read"
+
+[readArticle]
+other = "Read article"
+
+[youWon]
+other = "You won!"
