@@ -13,3 +13,6 @@ other = "Číst článek"
 
 [youWon]
 other = "Vyhrál jste!"
+
+[countOfMoves]
+other = "Počet posunů"

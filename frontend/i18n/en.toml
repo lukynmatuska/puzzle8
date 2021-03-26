@@ -16,3 +16,6 @@ other = "Read article"
 
 [youWon]
 other = "You won!"
+
+[countOfMoves]
+other = "Moves"

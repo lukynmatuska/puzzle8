@@ -1,13 +1,15 @@
+const lettersSelector = '.playground li';
+let countOfMoves = 0;
 // select the list items
-let ul = document.querySelectorAll('.playground li');
-// const letters = ["1", "2", "3", "4", "5", "6", "7", "8", ""];
-const letters = [1, 2, 3, 4, 5, 6, 7, 8, ""];
+let ul = document.querySelectorAll(lettersSelector);
+const letters = ["1", "2", "3", "4", "5", "6", "7", "8", ""];
 
 function setUp() {
     fillGrid(ul, letters);
     setId(ul)
 
     state.content = getState(ul);
+    isCorrect(letters, state.content)
     state.dimension = getDimension(state);
     // set up the droppable and dragabble contents
     setDroppable(ul);
@@ -87,8 +89,10 @@ const removeDroppable = (items) => {
 const setDraggable = (items) => {
     const [row, col] = getEmptyCell();
 
+    console.log('state.dimension:')
     console.log(state.dimension)
-    console.log([row, col])
+    console.log(`row: ${row}`)
+    console.log(`col: ${col}`)
 
     let left, right, top, bottom = null;
     if (state.dimension[row][col - 1]) left = state.dimension[row][col - 1];
@@ -136,6 +140,13 @@ const isSolvable = (arr) => {
 }
 
 const isCorrect = (solution, content) => {
+    for (let i = 0; i < solution.length; i++) {
+        if (content[i] === solution[i]) {
+            document.getElementById(`li${i}`).classList.add('success')
+        } else {
+            document.getElementById(`li${i}`).classList.remove('success')
+        }
+    }
     if (JSON.stringify(solution) == JSON.stringify(content)) return true;
     return false;
 }
@@ -203,14 +214,16 @@ const drop_handler = ev => {
 
 const dragend_handler = ev => {
     console.log("dragEnd");
+    countOfMoves ++;
+    document.getElementById('countOfMoves').innerHTML = countOfMoves;
     // Remove all of the drag data
     ev.dataTransfer.clearData();
     // remove all droppable attributes
-    removeDroppable(document.querySelectorAll('li'));
+    removeDroppable(document.querySelectorAll('.playground li'));
 
     // set new droppable and draggable attributes
-    setDroppable(document.querySelectorAll('li'));
-    setDraggable(document.querySelectorAll('li'))
+    setDroppable(document.querySelectorAll('.playground li'));
+    setDraggable(document.querySelectorAll('.playground li'))
 
     // if correct
     if (isCorrect(letters, state.content)) {

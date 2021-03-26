@@ -87,6 +87,13 @@ main.home h1, main.notfound h1 {
   margin-bottom: 0px;
   font-size: 4.5rem;
   text-shadow: 5px 5px 16px #000;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
 }
 
 @media only screen and (max-width: 600px) {
@@ -99,6 +106,13 @@ main.home p, main.notfound p {
   margin: 5px auto;
   max-width: 75%;
   text-shadow: 2px 2px 5px #000;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 main.home .links {
@@ -401,24 +415,9 @@ h2.c-bloglist__heading {
 }
 
 .playground {
-  /*display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  background-color: salmon;*/
-  background: #000;
-  /* width: 18vh;
-  height: 18vh;
-  margin: auto; */
-  width: 500px;
-  height: 500px;
+  min-width: 250px;
+  min-height: 250px;
   margin: 10px auto;
-}
-
-.playground div.drag-and-drop {
-  border: 1px solid #777;
-  height: 5vh;
-  width: 5vh;
-  background-color: red;
 }
 
 .playground ul {
@@ -426,24 +425,51 @@ h2.c-bloglist__heading {
   flex-wrap: wrap;
   list-style-type: none;
   justify-content: space-evenly;
-  /* font-family: 'Audiowide'; */
   color: #E4FDE1;
+}
+.dark .playground ul {
+  color: #000;
 }
 
 .playground ul li {
-  background: #456990;
+  background: #000;
   width: 30%;
   height: 150px;
-  border: 1px solid #028090;
   margin-top: 10px;
   text-align: center;
-  font-size: 2rem;
-  padding-top: 3rem;
+  font-size: 5rem;
+  padding-top: 1.5rem;
+  border: 1px solid #fff;
+  box-shadow: 2.5px 2.5px 8px #000;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
-.playground .empty {
-  background: #DAD4EF;
-  border: 2px solid #114B5F;
+.dark .playground ul li {
+  background: #fff;
+  border: 1px solid #000;
+  box-shadow: 2.5px 2.5px 8px #e7e5e5;
+}
+
+.playground ul li.success {
+  background-color: #6ED731;
+  border: 1px solid #000;
+  color: #000;
+}
+
+.playground ul li.empty {
+  background: #444;
+  border: 1px solid #000;
+  box-shadow: 2.5px 2.5px 8px #444;
+}
+
+.dark .playground ul li.empty {
+  background: #444;
 }
 
 /* Modal styles */
