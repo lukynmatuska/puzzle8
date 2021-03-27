@@ -3,6 +3,8 @@ let countOfMoves = 0;
 // select the list items
 let ul = document.querySelectorAll(lettersSelector);
 const letters = ["1", "2", "3", "4", "5", "6", "7", "8", ""];
+const state = {};
+state.content = letters;
 
 function setUp() {
     fillGrid(ul, letters);
@@ -17,11 +19,7 @@ function setUp() {
 
     console.log("The state content", state.content)
     console.log("The state dimension", state.dimension)
-
 }
-
-const state = {}
-state.content = letters;
 
 
 /**
@@ -55,6 +53,7 @@ const getDimension = (state) => {
     }
     return arr;
 }
+const lettersDimension = getDimension({ content: letters });
 
 /**
  * setters
@@ -88,11 +87,6 @@ const removeDroppable = (items) => {
 
 const setDraggable = (items) => {
     const [row, col] = getEmptyCell();
-
-    console.log('state.dimension:')
-    console.log(state.dimension)
-    console.log(`row: ${row}`)
-    console.log(`col: ${col}`)
 
     let left, right, top, bottom = null;
     if (state.dimension[row][col - 1]) left = state.dimension[row][col - 1];
@@ -189,7 +183,6 @@ const dragstart_handler = ev => {
 }
 
 const dragover_handler = ev => {
-    console.log("dragOver");
     ev.preventDefault();
 }
 
@@ -214,16 +207,16 @@ const drop_handler = ev => {
 
 const dragend_handler = ev => {
     console.log("dragEnd");
-    countOfMoves ++;
+    countOfMoves++;
     document.getElementById('countOfMoves').innerHTML = countOfMoves;
     // Remove all of the drag data
     ev.dataTransfer.clearData();
     // remove all droppable attributes
-    removeDroppable(document.querySelectorAll('.playground li'));
+    removeDroppable(document.querySelectorAll(lettersSelector));
 
     // set new droppable and draggable attributes
-    setDroppable(document.querySelectorAll('.playground li'));
-    setDraggable(document.querySelectorAll('.playground li'))
+    setDroppable(document.querySelectorAll(lettersSelector));
+    setDraggable(document.querySelectorAll(lettersSelector));
 
     // if correct
     if (isCorrect(letters, state.content)) {
@@ -240,4 +233,17 @@ const hideModal = () => {
     document.getElementById('modal').classList.add("hide");
 }
 
+const solve = () => {
+    if (isCorrect(letters, state.content)) {
+        console.log('solved');
+        return
+    }
+    // console.log('solving')
+    console.log('state.dimension:');
+    console.table(state.dimension);
+    console.log('letters:');
+    console.table(lettersDimension);
+}
+
 setUp()
+// solve()
