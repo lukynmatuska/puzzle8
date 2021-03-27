@@ -44,12 +44,12 @@ p a,
   color: #000;
 }
 
-p a:hover,
-p a:active,
+.dark p a:visited,
+.dark p a:active,
+.dark p a:hover
 p a:visited,
-.o-footer a:hover,
-.o-footer a:active,
-.o-footer a:visited {
+p a:active,
+p a:hover {
   color: #777 !important;
   background-color: transparent;
   border-bottom: 2px solid #777 !important;
@@ -66,7 +66,6 @@ main.home,
 main.notfound {
   flex-grow: 1;
   margin: 0px;
-  background-color: #fff;
   background-size: cover !important;
   color: #fff;
   display: flex;
@@ -113,6 +112,10 @@ main.home p, main.notfound p {
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+
+main.notfound p {
+  margin: 5px auto auto auto;
 }
 
 main.home .links {
@@ -473,31 +476,30 @@ h2.c-bloglist__heading {
 }
 
 /* Modal styles */
-#modal {
-  width: 40%;
-  height: 300px;
-  background: #DE5360;
+.modal {
+  background: #12801d;
   position: absolute;
   top: 30%;
   left: 50%;
   transform: translateX(-50%);
-  /* font-family: 'Arial'; */
 }
 
-#modal #message {
+.modal .message {
   color: #FDE1E3;
-  margin: 0;
-  font-size: 4rem;
+  margin: 5vw 10vw 10vw 10vw;
+  font-size: 5rem;
 }
 
 .hide {
   display: none;
 }
-#modal #header {
+
+.modal .header {
   text-align: right;
-  padding: 5px 10px;
+  padding: 5px;
 }
-#modal #header button {
+
+.modal .header button {
   padding: 10px;
   border: 0px;
   background: #456990;
