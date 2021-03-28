@@ -2,26 +2,7 @@
 <main class="o-main game text-center">
   <h1>{{ .Title }}</h1>
   {{ .Content}}
-  <div id="modal" class="modal hide">
-    <div class="header"><button onclick="hideModal()">x</button></div>
-    <h1 class="message">{{ i18n "youWon" }}</h1>
-  </div>
-  <p>{{ i18n "countOfMoves"}}: <span id="countOfMoves">0</span></p>
-  <div id="container" class="playground">
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-  </div>
-
 </main>
-{{ $puzzle8 := resources.Get "js/puzzle8.js" | minify }}
-<script src="{{ $puzzle8.RelPermalink }}"></script>
+{{ $puzzle := resources.Get "js/puzzle.class.js" | minify }}
+<script src="{{ $puzzle.RelPermalink }}"></script>
 {{ end }}

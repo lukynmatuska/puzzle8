@@ -3,4 +3,4 @@ title: Game
 layout: game
 ---
 
-There is the playground.
+There will be the playground.
