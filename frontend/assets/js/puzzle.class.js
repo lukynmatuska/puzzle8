@@ -1,16 +1,17 @@
 class Puzzle {
     constructor(size = 2) {
         this.size = size;
-        this.history = [];
         const numbers = [];
-        for (let i = 1; i < size * size; i++) {
+        for (let i = 1; i < (this.size * this.size); i++) {
             numbers.push(i);
         }
-        numbers.push('')
+        numbers.push('');
         this.final = [...numbers];
         this.finalMatrix = this.createMatrix(numbers);
         this.matrix = this.createMatrix(this.shuffle(numbers));
-        this.history.push(this.matrix);
+        while (!this.isSolvable(this.matrix)) {
+            this.matrix = this.createMatrix(this.shuffle(numbers));
+        }
     }
 
     createMatrix(letters) {
@@ -93,23 +94,23 @@ class Puzzle {
         return result;
     }
 
-    isSame = (solution, content) => {
+    isSame(solution, content) {
         return (JSON.stringify(solution) === JSON.stringify(content))
     }
 
     solve() {
         if (this.isSame(this.matrix, this.finalMatrix)) {
-            console.log('SOLVED');
+            console.log('The puzzle is already solved.');
             return;
         }
         let startDate = new Date();
-        console.log('solving');
-        /*console.log('-------------------------')
-        console.log('final:');
+        console.log('Solving the puzzle.');
+        console.log('-------------------------')
+        console.log('Final:');
         console.table(this.finalMatrix);
-        console.log('start:');
+        console.log('Start:');
         console.table(this.matrix);
-        console.log('-------------------------') */
+        console.log('-------------------------')
         let solved = false;
         const set = new Set();
         set.add(JSON.stringify(this.matrix));
