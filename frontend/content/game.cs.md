@@ -3,4 +3,4 @@ title: Hra
 layout: game
 ---
 
-Tady bude hřiště!
+Tady je hřiště!
