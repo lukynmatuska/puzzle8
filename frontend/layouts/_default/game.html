@@ -2,7 +2,11 @@
 <main class="o-main game text-center">
   <h1>{{ .Title }}</h1>
   {{ .Content}}
+  <p>{{ i18n "countOfMoves"}}: <span id="countOfMoves">0</span></p>
+  <div id="playground"></div>
 </main>
 {{ $puzzle := resources.Get "js/puzzle.class.js" | minify }}
 <script src="{{ $puzzle.RelPermalink }}"></script>
+{{ $PuzzlePlayground := resources.Get "js/puzzleplayground.class.js" }}
+<script src="{{ $PuzzlePlayground.RelPermalink }}"></script>
 {{ end }}

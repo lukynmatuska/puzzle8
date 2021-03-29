@@ -417,6 +417,18 @@ h2.c-bloglist__heading {
   box-shadow: 0px 0px 5px 5px rgb(125, 226, 234);
 }
 
+.size2x2 ul li {
+  width: 45% !important;
+}
+
+.size4x4 ul li {
+  width: 22.5% !important;
+}
+
+.size5x5 ul li {
+  width: 18.5% !important;
+}
+
 .playground {
   min-width: 250px;
   min-height: 250px;
@@ -438,7 +450,7 @@ h2.c-bloglist__heading {
   background: #000;
   width: 30%;
   height: 150px;
-  margin-top: 10px;
+  margin: 10px 1px;
   text-align: center;
   font-size: 5rem;
   padding-top: 1.5rem;

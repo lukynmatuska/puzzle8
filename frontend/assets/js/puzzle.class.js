@@ -1,16 +1,18 @@
 class Puzzle {
     constructor(size = 2) {
         this.size = size;
-        const numbers = [];
+        this.numbers = [];
         for (let i = 1; i < (this.size * this.size); i++) {
-            numbers.push(i);
+            this.numbers.push(i);
         }
-        numbers.push('');
-        this.final = [...numbers];
-        this.finalMatrix = this.createMatrix(numbers);
-        this.matrix = this.createMatrix(this.shuffle(numbers));
+        this.numbers.push('');
+        this.final = [...this.numbers];
+        this.finalMatrix = this.createMatrix(this.numbers);
+        this.numbers = this.shuffle(this.numbers);
+        this.matrix = this.createMatrix(this.numbers);
         while (!this.isSolvable(this.matrix)) {
-            this.matrix = this.createMatrix(this.shuffle(numbers));
+            this.numbers = this.shuffle(this.numbers);
+            this.matrix = this.createMatrix(this.numbers);
         }
     }
 
@@ -58,7 +60,7 @@ class Puzzle {
         for (let row = 0; row < matrix.length; row++) {
             for (let col = 0; col < matrix[row].length; col++) {
                 if (matrix[row][col] === '') {
-                    return { row: row, col: col }
+                    return { row, col }
                 }
             }
         }
@@ -129,13 +131,19 @@ class Puzzle {
                     let endDate = new Date();
                     solved = true;
                     this.matrix = matrix;
+                    queue[0].moves.push(number)
                     console.log('Pocet vygenerovaných stavu (uzlu): ', set.size);
-                    console.log('Pocet kroku:', queue[0].moves.length + 1);
+                    console.log('Pocet kroku:', queue[0].moves.length);
                     console.log('Vypis vsech kroku:', queue[0].moves);
                     console.log('Start v', startDate);
                     console.log('Konec v ', endDate);
-                    console.log('Celkem:', endDate - startDate, 'ms')
-                    break;
+                    console.log('Celkem:', endDate - startDate, 'ms');
+                    return {
+                        countOfStates: set.size,
+                        countOfSteps: queue[0].moves.length + 1,
+                        steps: queue[0].moves,
+                        time: endDate - startDate
+                    };
                 }
                 if (set.has(JSON.stringify(matrix))) {
                     continue;
@@ -151,7 +159,7 @@ class Puzzle {
     }
 }
 
-const puzzle = new Puzzle(3)
+/*const puzzle = new Puzzle(3)
 console.log(puzzle)
-console.table(puzzle.matrix)
+console.table(puzzle.matrix)*/
 // puzzle.solve()
