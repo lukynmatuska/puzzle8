@@ -3,10 +3,18 @@
   <h1>{{ .Title }}</h1>
   {{ .Content}}
   <p>{{ i18n "countOfMoves"}}: <span id="countOfMoves">0</span></p>
+  <div id="modal" class="modal hide">
+    <div class="header"><button onclick="hideModal()">x</button></div>
+    <h1 class="message">{{ i18n "youWon" }}</h1>
+  </div>
   <div id="playground"></div>
 </main>
 {{ $puzzle := resources.Get "js/puzzle.class.js" | minify }}
 <script src="{{ $puzzle.RelPermalink }}"></script>
-{{ $PuzzlePlayground := resources.Get "js/puzzleplayground.class.js" }}
+{{ $PuzzlePlayground := resources.Get "js/puzzleplayground.class.js" | minify }}
 <script src="{{ $PuzzlePlayground.RelPermalink }}"></script>
+<script>
+  const prvniPuzzle = new PuzzlePlayground(document.getElementById('playground'), new Puzzle(3));
+// prvniPuzzle.solve()
+</script>
 {{ end }}
