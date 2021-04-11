@@ -1,5 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <set>
+#include <queue>
+#include <random>
 
 struct coordinates
 {
@@ -28,6 +32,15 @@ public: // Access specifier
             matrix.push_back(row);
         }
         matrix.back().back() = 0;
+    }
+
+    void shuffle()
+    {
+        for (size_t i = 0; i < 200; i++)
+        {
+            const auto to_swap_variants = whatCanISwap();
+            move(to_swap_variants[std::random_device()() % to_swap_variants.size()]);
+        }
     }
 
     coordinates getEmptyCellFromMatrix()
@@ -82,6 +95,11 @@ public: // Access specifier
 
     auto operator<=>(const puzzleMatrix &) const = default;
 
+    int operator[](const coordinates &coordinates) const
+    {
+        return matrix.at(coordinates.row).at(coordinates.col);
+    }
+
     friend std::ostream &operator<<(std::ostream &os, const puzzleMatrix &m)
     {
         for (auto &i : m.matrix)
@@ -99,23 +117,79 @@ public: // Access specifier
 class puzzle8
 {
     puzzleMatrix matrix;
-    puzzleMatrix finalMatrix;
+
+    struct queue_node
+    {
+        puzzleMatrix matrix;
+        std::vector<int> moves;
+
+        queue_node(puzzleMatrix matrix, std::vector<int> moves) : matrix(matrix), moves(moves)
+        {
+        }
+    };
 
 public: // Access specifier
-    puzzle8(puzzleMatrix puzzleMatrix = puzzleMatrix()) : matrix(puzzleMatrix)
-    { // Constructor
-        std::cout << "Hello world from Puzzle!\n";
+    puzzle8(puzzleMatrix puzzleMatrix) : matrix(puzzleMatrix)
+    {
+    }
+
+    std::vector<int> solve()
+    {
+        if (matrix == puzzleMatrix())
+        {
+            std::cout << "The puzzle is already solved.\n";
+            return {};
+        }
+        const auto start = std::chrono::steady_clock::now();
+        auto solved = false;
+        std::set<puzzleMatrix> set;
+        set.insert(matrix);
+        std::queue<queue_node> queue;
+        queue.emplace(matrix, std::vector<int>());
+        while (!solved)
+        {
+            for (coordinates const &move : queue.front().matrix.whatCanISwap())
+            {
+                auto moves = queue.front().moves;
+                auto matrix = queue.front().matrix;
+                auto number = matrix[move];
+                matrix.move(move);
+                moves.push_back(number);
+                if (matrix == puzzleMatrix())
+                {
+                    const auto end = std::chrono::steady_clock::now();
+                    const auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+                    std::cout << "The puzzle is solved.\n";
+                    std::cout << "Duration time: " << elapsed.count() << "ms\n";
+                    std::cout << "Count of steps: " << moves.size() << "\n";
+                    std::cout << "Count of unit nodes: " << set.size() << "\n";
+                    // std::cout << "Steps: " << moves << "\n";
+                    return queue.front().moves;
+                }
+                if (set.contains(matrix))
+                {
+                    continue;
+                }
+                set.insert(matrix);
+                queue.push(queue_node(matrix, moves));
+            }
+            queue.pop();
+        }
+        return {};
     }
 };
 
 int main()
 {
-    std::cout << "Ahoj svete!\n";
     puzzleMatrix firstPuzzleMatrix;
-    std::cout << firstPuzzleMatrix;
-    firstPuzzleMatrix.move({1, 1});
-    std::cout << firstPuzzleMatrix;
-    // puzzle8 myVeryFirstPuzzleInCpp;
+    // std::cout << firstPuzzleMatrix;
+    // firstPuzzleMatrix.move({1, 2});
+    // firstPuzzleMatrix.move({1, 1});
+    // firstPuzzleMatrix.move({0, 1});
+    // std::cout << firstPuzzleMatrix;
+    firstPuzzleMatrix.shuffle();
+    puzzle8 myVeryFirstPuzzleInCpp(firstPuzzleMatrix);
+    myVeryFirstPuzzleInCpp.solve();
     return 0;
 }
 
