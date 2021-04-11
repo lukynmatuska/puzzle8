@@ -7,6 +7,8 @@ struct coordinates
     size_t col = 0;
 
     coordinates(size_t row, size_t col) : row(row), col(col) {}
+
+    auto operator<=>(const coordinates &) const = default;
 };
 
 class puzzleMatrix
@@ -40,6 +42,7 @@ public: // Access specifier
                 }
             }
         }
+        return {0, 0};
     }
 
     std::vector<coordinates> whatCanISwap()
@@ -63,6 +66,18 @@ public: // Access specifier
             ret.emplace_back(row, col + 1);
         }
         return ret;
+    }
+
+    void move(coordinates destinationOfCell)
+    {
+        const auto emptyCell = getEmptyCellFromMatrix();
+        const auto availableMoves = whatCanISwap();
+        const auto it = std::find(availableMoves.begin(), availableMoves.end(), destinationOfCell);
+        if (it == availableMoves.end())
+        {
+            throw std::runtime_error("Invalid move. Move is out of range.");
+        }
+        std::swap(matrix[emptyCell.row][emptyCell.col], matrix[destinationOfCell.row][destinationOfCell.col]);
     }
 
     auto operator<=>(const puzzleMatrix &) const = default;
@@ -96,7 +111,10 @@ public: // Access specifier
 int main()
 {
     std::cout << "Ahoj svete!\n";
-    std::cout << puzzleMatrix();
+    puzzleMatrix firstPuzzleMatrix;
+    std::cout << firstPuzzleMatrix;
+    firstPuzzleMatrix.move({1, 1});
+    std::cout << firstPuzzleMatrix;
     // puzzle8 myVeryFirstPuzzleInCpp;
     return 0;
 }
